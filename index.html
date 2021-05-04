@@ -433,7 +433,12 @@
           <!-- /.blog-post -->
 
           <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="#">Older</a>
+            <a
+              onclick="removeNewBlogPost()"
+              class="btn btn-outline-primary"
+              href="#"
+              >Older</a
+            >
             <a
               class="btn btn-outline-secondary disabled"
               href="#"
@@ -507,18 +512,18 @@
 
     <script>
       /*
-        JS Exercises
-        EX11) Write a function to add a new link into the navbar
-        EX12) Write a function to change the color of the main title
-        EX13) Write a function to change the background of the jumbotron
-        EX14) Write a function to remove all the links under "Elsewhere"
-        EX15) Write a function to change the column size for post headings
-        EX16) Write a function to remove the "Search" magnifying glass icon
-        EX17) Write a function to trim just the first 50 characters in the first paragraph for each blog post
-        EX18) Write a function and attach it to the "Newer" button, to add new Blog Post (just div and title)
-        EX19) Write a function and attach it to the "Older" button, to remove the last Blog Post
-        EX20) Write an alert with the name of the author every time the user hover with the mouse over an author name
-    */
+          JS Exercises
+          EX11) Write a function to add a new link into the navbar
+          EX12) Write a function to change the color of the main title
+          EX13) Write a function to change the background of the jumbotron
+          EX14) Write a function to remove all the links under "Elsewhere"
+          EX15) Write a function to change the column size for post headings
+          EX16) Write a function to remove the "Search" magnifying glass icon
+          EX17) Write a function to trim just the first 50 characters in the first paragraph for each blog post
+          EX18) Write a function and attach it to the "Newer" button, to add new Blog Post (just div and title)
+          EX19) Write a function and attach it to the "Older" button, to remove the last Blog Post
+          EX20) Write an alert with the name of the author every time the user hover with the mouse over an author name
+      */
       /*  EX11) Write a function to add a new link into the navbar */
       const addNewLinkIntoNavbar = function () {
         const nav = document.getElementsByClassName("nav")[0];
@@ -562,14 +567,60 @@
         olToBeRemoved.remove();
       };
       /* EX15) Write a function to change the column size for post headings */
+
       /* EX16) Write a function to remove the "Search" magnifying glass icon */
       const removeSearchIcon = function () {
         let searchIcon = document.querySelector("header a svg");
         searchIcon.remove();
       };
       /* EX17) Write a function to trim just the first 50 characters in the first paragraph for each blog post */
+      const trim50CharchtersFirstParagraph = function () {
+        let firstParagraphOfEachBlog = document.querySelectorAll(
+          ".blog-post h2+p  "
+        );
+        console.log(firstParagraphOfEachBlog);
+        firstParagraphOfEachBlog.forEach((blog) => {
+          blog.innerHTML.slice(50);
+        });
+      };
+      trim50CharchtersFirstParagraph();
+
+      /* function trim50Char() {
+          const blogPost = document.querySelectorAll("div .blog-post>p");
+          console.log(blogPost[0].innerHTML);
+          for (let i = 0; i < blogPost.length; i++) {
+            blogPost[i].innerHTML = blogPost[i].innerHTML.slice(50);
+          }
+        }
+        trim50Char(); */
       /* EX18) Write a function and attach it to the "Newer" button, to add new Blog Post (just div and title) */
+      const addNewBlogPost = function () {
+        let btnToAddNewBlogPost = document.querySelector(
+          ".blog-pagination .btn-outline-secondary"
+        );
+        btnToAddNewBlogPost.classList.remove("disabled");
+        btnToAddNewBlogPost.addEventListener("click", function () {
+          let lastBlog = document.getElementsByClassName("blog-post");
+          let newDiv = document.createElement("div");
+          let newHeader = document.createElement("h2");
+          newHeader.innerText = "New Blog Title";
+          newHeader.classList.add("blog-post");
+          newHeader.style.color = "red";
+          newDiv.appendChild(newHeader);
+          lastBlog[lastBlog.length - 1].appendChild(newDiv);
+        });
+      };
+      addNewBlogPost();
+
       /* EX19) Write a function and attach it to the "Older" button, to remove the last Blog Post */
+      const removeNewBlogPost = function () {
+        /*  let btnToRemoveNewBlogPost = document.querySelector(
+            ".blog-pagination .btn-outline-secondary"
+          ) */ /* ;body > main > div > div > div:nth-child(4) > div */
+        let lastBlog = document.getElementsByClassName("blog-post");
+        lastBlog[lastBlog.length - 1].remove();
+        /* lastBlog[lastBlog.length - 1].appendChild(newDiv); */
+      };
       /* EX20) Write an alert with the name of the author every time the user hover with the mouse over an author name */
       const alertNameOfAuthorWhenHover = function () {
         let autorNameLinks = document.querySelectorAll(".blog-post-meta  >a");
@@ -578,8 +629,8 @@
             alert(event.target.innerText);
           });
           /* link.addEventListener("mouseover", function (e) {
-            alert(event.target.innerText);
-          }); */
+              alert(event.target.innerText);
+            }); */
         });
       };
       alertNameOfAuthorWhenHover();
