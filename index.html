@@ -567,6 +567,13 @@
         olToBeRemoved.remove();
       };
       /* EX15) Write a function to change the column size for post headings */
+      const changeColumnSizePostHeadings = function () {
+        let postHeadings = document.getElementsByClassName("blog-post-title");
+        postHeadings.forEach((blogHeadings) => {
+          blogHeadings.style.columnWidth = "100px";
+        });
+      };
+      changeColumnSizePostHeadings();
 
       /* EX16) Write a function to remove the "Search" magnifying glass icon */
       const removeSearchIcon = function () {
