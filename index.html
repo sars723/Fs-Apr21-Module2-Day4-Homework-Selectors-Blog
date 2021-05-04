@@ -75,6 +75,12 @@
       footer {
         background-color: lightgray;
       }
+      .btn-created-new {
+        padding: 10px;
+        font-size: 24px;
+        border-radius: 10px;
+        background-color: rgb(255, 230, 0);
+      }
     </style>
 
     <meta charset="utf-8" />
@@ -136,7 +142,9 @@
             <a class="blog-header-logo text-dark" href="#">Large</a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
-            <button onclick="removeSearchIcon()">Remove Search Icon</button>
+            <button class="btn-created-new" onclick="removeSearchIcon()">
+              Remove Search Icon
+            </button>
             <a class="text-muted" href="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -205,6 +213,9 @@
           </button>
         </div>
       </div>
+      <button class="btn-created-new" onclick="changeColumnSizePostHeadings()">
+        Change Jumbotron Column Size
+      </button>
 
       <div class="row mb-2">
         <div class="col-md-6">
@@ -486,7 +497,7 @@
               <li><a href="#">Facebook</a></li>
             </ol>
             <button
-              class="btn-new-created"
+              class="btn-created-new"
               onclick="removeLinksUnderElsewhere()"
             >
               Remove All Ol under Elsewhere
@@ -567,13 +578,16 @@
         olToBeRemoved.remove();
       };
       /* EX15) Write a function to change the column size for post headings */
+      /*  EX15) Write a function to change the column size for heading in jumbotron */
       const changeColumnSizePostHeadings = function () {
-        let postHeadings = document.getElementsByClassName("blog-post-title");
-        postHeadings.forEach((blogHeadings) => {
-          blogHeadings.style.columnWidth = "100px";
-        });
+        let postHeadings = document.querySelector(".jumbotron >div");
+        postHeadings.classList.remove("col-md-6");
+        postHeadings.classList.add("col-md-12");
+        /*  postHeadings.forEach((blogHeadings) => {
+          postHeadings.style.columnWidth = "100px";
+        }); */
       };
-      changeColumnSizePostHeadings();
+      /* changeColumnSizePostHeadings(); */
 
       /* EX16) Write a function to remove the "Search" magnifying glass icon */
       const removeSearchIcon = function () {
